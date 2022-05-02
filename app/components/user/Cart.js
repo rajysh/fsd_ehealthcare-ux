@@ -98,20 +98,20 @@ function Cart() {
   }
 
   async function deleteHandler(id) {
-    const areYouSure = window.confirm("Do you really want to delete this product from cart?")
-    if (areYouSure) {
-      try {
-        const response = await Axios.delete(`/cart/Delete/${id}`, { headers: { Authorization: `Bearer ${appState.user.accessToken}`, "content-type": "application/json" } })
+    // const areYouSure = window.confirm("Do you really want to delete this product from cart?")
+    // if (areYouSure) {
+    try {
+      const response = await Axios.delete(`/cart/Delete/${id}`, { headers: { Authorization: `Bearer ${appState.user.accessToken}`, "content-type": "application/json" } })
 
-        if (response.status == 200) {
-          //1, display a flash message
-          appDispatch({ type: "flashMessage", value: "Product was successfully deleted from the cart." })
-          dispatch({ type: "reload" })
-        }
-      } catch (error) {
-        console.log(error)
+      if (response.status == 200) {
+        //1, display a flash message
+        appDispatch({ type: "flashMessage", value: "Product was successfully deleted from the cart." })
+        dispatch({ type: "reload" })
       }
+    } catch (error) {
+      console.log(error)
     }
+    // }
   }
 
   async function placeOrder() {
