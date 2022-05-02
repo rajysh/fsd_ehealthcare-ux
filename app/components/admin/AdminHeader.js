@@ -7,7 +7,7 @@ import StateContext from "../../StateContext"
 
 function AdminHeader(props) {
   const appState = useContext(StateContext)
-  const headerContent = appState.loggedIn ? <AdminHeaderLoggedIn /> : ""
+  const headerContent = appState.isAdminLogin ? <AdminHeaderLoggedIn /> : ""
   return (
     <header className="header-bar bg-primary mb-3">
       <div className="container d-flex flex-column flex-md-row align-items-center p-3">

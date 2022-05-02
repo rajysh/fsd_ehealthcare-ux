@@ -73,6 +73,7 @@ function AddCart(props) {
         // console.log(appState.cartCount)
         const count = appState.cartCount
         appDispatch({ type: "incrementCartCount", data: count })
+        appDispatch({ type: "flashMessage", value: "Added to cart successfully." })
         // console.log("Cart" + count)
         // console.log("New product was created.")
       }
@@ -81,53 +82,9 @@ function AddCart(props) {
     }
   }
   return (
-    // <Link to="javascript:void(0);" className="btn btn-danger">
-    //   Add to cart
-    // </Link>
-
     <button onClick={handleSubmit} type="button" className="btn bg-cart">
       <i className="fa fa-cart-plus mr-2"></i> Add to cart
     </button>
-    // <div id="chat-wrapper" className={"chat-wrapper shadow border-top border-left border-right " + (appState.isChatOpen ? "chat-wrapper--is-visible" : "")}>
-    //   <div className="chat-title-bar bg-primary">
-    //     Chat
-    //     <span onClick={() => appDispatch({ type: "closeChat" })} className="chat-title-bar-close">
-    //       <i className="fas fa-times-circle"></i>
-    //     </span>
-    //   </div>
-    //   <div id="chat" className="chat-log" ref={chatLog}>
-    //     {state.chatMessages.map((message, index) => {
-    //       if (message.username == appState.user.username) {
-    //         return (
-    //           <div key={index} className="chat-self">
-    //             <div className="chat-message">
-    //               <div className="chat-message-inner">{message.message}</div>
-    //             </div>
-    //             <img className="chat-avatar avatar-tiny" src={message.avatar} />
-    //           </div>
-    //         )
-    //       }
-    //       return (
-    //         <div key={index} className="chat-other">
-    //           <Link to={`/profile/${message.username}`}>
-    //             <img className="avatar-tiny" src={message.avatar} />
-    //           </Link>
-    //           <div className="chat-message">
-    //             <div className="chat-message-inner">
-    //               <Link to={`/profile/${message.username}`}>
-    //                 <strong>{message.username}: </strong>
-    //               </Link>
-    //               {message.message}
-    //             </div>
-    //           </div>
-    //         </div>
-    //       )
-    //     })}
-    //   </div>
-    //   <form onSubmit={handleSubmit} id="chatForm" className="chat-form border-top">
-    //     <input value={state.fieldValue} onChange={handleFieldChange} ref={chatField} type="text" className="chat-field" id="chatField" placeholder="Type a message…" autoComplete="off" />
-    //   </form>
-    // </div>
   )
 }
 

@@ -211,7 +211,7 @@ function EditProduct() {
           const response = await Axios.put(`/admin/updateMedicine`, { id: `${state.id}`, name: state.name.value, companyName: state.companyName.value, imageUrl: state.imageUrl.value, quantity: state.quantity.value, price: state.price.value, expireDate: state.expireDate.value, uses: state.uses.value, token: appState.user.token }, { cancelToken: ourRequest.token })
           console.log(response.data)
           dispatch({ type: "saveRequestCompleted" })
-          appDispatch({ type: "flashMessage", value: "Post was updated." })
+          appDispatch({ type: "flashMessage", value: "Product was updated." })
           console.log(response.data)
         } catch (error) {
           console.log(error)

@@ -1,16 +1,17 @@
 import React, { useEffect, useContext } from "react"
-import Page from "../Page"
-import StateContext from "../../StateContext"
+import Page from "./Page"
+import StateContext from "../StateContext"
 import { useImmer } from "use-immer"
-import LoadingDotsIcon from "../LoadingDotsIcon"
+import LoadingDotsIcon from "./LoadingDotsIcon"
 import Axios from "axios"
 import { Link } from "react-router-dom"
 import ReactTooltip from "react-tooltip"
-import DispatchContext from "../../DispatchContext"
+import Post from "./Post"
+import DispatchContext from "../DispatchContext"
 import { useNavigate } from "react-router-dom"
 import { useImmerReducer } from "use-immer"
 
-function AdminHome() {
+function Home() {
   const appState = useContext(StateContext)
   const appDispatch = useContext(DispatchContext)
   const navigate = useNavigate()
@@ -85,7 +86,7 @@ function AdminHome() {
   }
 
   async function deleteHandler(id) {
-    const areYouSure = window.confirm("Do you really want to delete this product?")
+    const areYouSure = window.confirm("Do you really want to delete this post?")
     if (areYouSure) {
       try {
         const response = await Axios.delete(`/admin/deleteMedicineById/${id}`, { data: { token: appState.user.token } })
@@ -104,14 +105,14 @@ function AdminHome() {
     <Page title="Your medicines" wide={true}>
       {state.products.length > 0 && (
         <>
-          <h2 className="text-center-mb-4">Product Management</h2>
+          <h2 className="text-center-mb-4">The Latest From Those You Follow</h2>
           {/* <div className="list-group">
             {state.medicines.map(post => {
               return <Post post={post} key={post._id} />
             })}
           </div> */}
-          <Link className="btn btn-sm btn-success mr-2 ml-1" to="/admin/create-product">
-            Add New Product
+          <Link className="btn btn-sm btn-success mr-2 ml-1" to="/create-product">
+            Create Product
           </Link>
           <table className="table table-hover">
             <thead>
@@ -122,7 +123,7 @@ function AdminHome() {
                 <th scope="col">Company Name</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Price</th>
-                {/* <th scope="col">Uses</th> */}
+                <th scope="col">Uses</th>
                 <th scope="col">Expiry Date</th>
                 <th scope="col">Action</th>
               </tr>
@@ -139,7 +140,7 @@ function AdminHome() {
 
                   <td>{product.quantity}</td>
                   <td>{product.price}</td>
-                  {/* <td>{product.uses}</td> */}
+                  <td>{product.uses}</td>
                   <td>{product.expireDate}</td>
                   <td>
                     {/* <button className="btn btn-primary" type="button">
@@ -149,7 +150,7 @@ function AdminHome() {
                       Delete
                     </button> */}
                     <span className="pt-2">
-                      <Link to={`/admin/product/${product.id}/edit`} data-tip="Edit" data-for="edit" className="text-primary mr-2">
+                      <Link to={`/product/${product.id}/edit`} data-tip="Edit" data-for="edit" className="text-primary mr-2">
                         <i className="fas fa-edit"></i>
                       </Link>
                       <ReactTooltip id="edit" className="custom-tooltip" />{" "}
@@ -178,4 +179,4 @@ function AdminHome() {
   )
 }
 
-export default AdminHome
+export default Home

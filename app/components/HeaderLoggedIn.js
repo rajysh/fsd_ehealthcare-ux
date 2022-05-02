@@ -27,14 +27,14 @@ function HeaderLoggedIn(props) {
     const ourRequest = Axios.CancelToken.source()
     async function fetchData() {
       try {
-        console.log(`/cart/GetByUserID/${appState.user.id}`)
+        // console.log(`/cart/GetByUserID/${appState.user.id}`)
         const response = await Axios.get(`/cart/GetByUserID/${appState.user.id}`, { headers: { Authorization: `Bearer ${appState.user.accessToken}`, "content-type": "application/json" } }, { cancelToken: ourRequest.token })
-        console.log(response.data.items.length)
+        // console.log(response.data.items.length)
         // setState(draft => {
         //   draft.isLoading = false
         //   //draft.products = response.data
         // })
-        appDispatch({ type: "incrementCartCount", data: response.data.items.length })
+        appDispatch({ type: "incrementCartCount", data: response.data.items.length - 1 })
       } catch (error) {
         console.log(error + "There was a problem.")
       }
@@ -55,19 +55,23 @@ function HeaderLoggedIn(props) {
         <i className="fas fa-comment"></i>
         {appState.cartCount ? <span className="chat-count-badge text-white">{appState.cartCount < 10 ? appState.cartCount : "9+"} </span> : ""}
       </span> */}
-      <Badge className="mr-4" color="secondary" badgeContent={appState.cartCount} data-for="cart" data-tip="Cart">
-        <ShoppingCartIcon />
-        {"  "}
-      </Badge>
+      {!appState.isAdminPage && (
+        <Badge className="mr-4" color="secondary" badgeContent={appState.cartCount > 0 ? appState.cartCount : "0"} data-for="cart" data-tip="Cart">
+          <ShoppingCartIcon />
+          {"  "}
+        </Badge>
+      )}
       <ReactTooltip place="bottom" id="cart" class="custom-tooltip" />
       {"  "}
       {/* <Link data-for="profile" data-tip="My Profile" to={`/profile/${appState.user.username}`} className="mr-2">
         <img className="small-header-avatar" src={appState.user.avatar} />
       </Link> */}
       <ReactTooltip place="bottom" id="profile" class="custom-tooltip" />
-      <Link className="btn btn-sm btn-success mr-2 ml-1" to="/cart">
-        Go to Cart
-      </Link>
+      {!appState.isAdminPage && (
+        <Link className="btn btn-sm btn-success mr-2 ml-1" to="/cart">
+          Go to Cart
+        </Link>
+      )}
       <button onClick={handleLogout} className="ml-1 btn btn-sm btn-secondary">
         Sign Out
       </button>

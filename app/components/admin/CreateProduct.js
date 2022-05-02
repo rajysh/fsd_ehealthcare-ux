@@ -28,7 +28,7 @@ function CreateProduct(props) {
       //Redirect to new product URL
       // addFlashMessage("Congratulations, you have successfully created a product!!")
       appDispatch({ type: "flashMessage", value: "Congrats, you created a new product!!" })
-      navigate(`/`)
+      navigate(`/admin/home`)
     } catch (error) {
       console.log("There was a problem updating the product.")
     }

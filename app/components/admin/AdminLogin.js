@@ -95,28 +95,28 @@ function AdminLogin() {
   }, [state.password.value])
 
   useEffect(() => {
-    appDispatch({ type: "adminLogin" })
-    console.log("admin")
+    appDispatch({ type: "adminPage" })
+    console.log("admin page")
   }, [])
 
-  useEffect(() => {
-    if (state.email.checkCount) {
-      //send axios request here
-      const ourRequest = Axios.CancelToken.source()
-      async function fetchResults() {
-        try {
-          console.log(`${Axios.defaults.baseURL}/user/findUser/${state.email.value}`)
-          const response = await Axios.get(`/user/findUser/${state.email.value}`, { cancelToken: ourRequest.token })
-          dispatch({ type: "emailUniqueResults", value: response.data })
-        } catch (e) {
-          console.log(e)
-        }
-      }
-      fetchResults()
+  // useEffect(() => {
+  //   if (state.email.checkCount) {
+  //     //send axios request here
+  //     const ourRequest = Axios.CancelToken.source()
+  //     async function fetchResults() {
+  //       try {
+  //         console.log(`${Axios.defaults.baseURL}/user/findUser/${state.email.value}`)
+  //         const response = await Axios.get(`/user/findUser/${state.email.value}`, { cancelToken: ourRequest.token })
+  //         dispatch({ type: "emailUniqueResults", value: response.data })
+  //       } catch (e) {
+  //         console.log(e)
+  //       }
+  //     }
+  //     fetchResults()
 
-      return () => ourRequest.cancel()
-    }
-  }, [state.email.checkCount])
+  //     return () => ourRequest.cancel()
+  //   }
+  // }, [state.email.checkCount])
 
   // const { setLoggedIn } = useContext(ExampleContext)
   //  const appDispatch = useContext(DispatchContext)
