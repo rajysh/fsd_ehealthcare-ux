@@ -25,6 +25,9 @@ import AdminHome from "./components/admin/AdminHome"
 import AdminHeader from "./components/admin/AdminHeader"
 import Cart from "./components/user/Cart"
 import PlaceOrder from "./components/user/PlaceOrder"
+import UserList from "./components/admin/UserList"
+import CreateUser from "./components/admin/CreateUser"
+import EditUser from "./components/admin/EditUser"
 
 function Main() {
   const initialState = {
@@ -162,11 +165,14 @@ function Main() {
               {/* <Route path="/" element={state.loggedIn ? <Home /> : <Login />} /> */}
               {/* <Route path="/admin/login" element={<AdminLogin />} /> */}
               <Route path="/admin/home" element={state.loggedIn && state.adminLoggedIn ? <AdminHome /> : <AdminLogin />} />
+              <Route path="/admin/users" element={state.loggedIn && state.adminLoggedIn ? <UserList /> : <AdminLogin />} />
               <Route path="/cart" element={<Cart />} />
               {/* <Route path="/" element={state.loggedIn ? <Home /> : <Login />} /> */}
               {/* <Route path="/admin/login" element={<AdminLogin />} /> */}
-              <Route path="/admin/create-product" element={<CreateProduct addFlashMessage={addFlashMessage} />} />
-              <Route path="/admin/product/:id/edit" element={<EditProduct />} />
+              <Route path="/admin/create-product" element={state.loggedIn && state.adminLoggedIn ? <CreateProduct addFlashMessage={addFlashMessage} /> : <AdminLogin />} />
+              <Route path="/admin/create-user" element={state.loggedIn && state.adminLoggedIn ? <CreateUser addFlashMessage={addFlashMessage} /> : <AdminLogin />} />
+              <Route path="/admin/product/:id/edit" element={state.loggedIn && state.adminLoggedIn ? <EditProduct /> : <AdminLogin />} />
+              <Route path="/admin/user/:id/edit" element={state.loggedIn && state.adminLoggedIn ? <EditUser /> : <AdminLogin />} />
               <Route path="/place-order" element={<PlaceOrder />} />
               <Route path="/about-us" element={<About />} />
               <Route path="/terms" element={<Terms />} />
